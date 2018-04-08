@@ -84,6 +84,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp14</LanguageStandard>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -115,12 +116,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="AdmitTIme.cpp" />
+    <ClCompile Include="Time.cpp" />
+    <ClCompile Include="Date.cpp" />
+    <ClCompile Include="Name.cpp" />
     <ClCompile Include="Patient.cpp" />
     <ClCompile Include="Tester.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AdmitTime.hpp" />
+    <ClInclude Include="Time.hpp" />
+    <ClInclude Include="Date.hpp" />
+    <ClInclude Include="Name.hpp" />
     <ClInclude Include="Patient.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

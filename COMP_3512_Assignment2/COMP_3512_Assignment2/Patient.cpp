@@ -3,26 +3,39 @@
 Patient::Patient() {
 
 }
-void Patient::setFirstName(std::string _firstName) {
-	Patient::firstName = _firstName;
+
+void Patient::setHealthCareNumber(std::string _healthCareNumber) {
+	healthCareNumber = _healthCareNumber;
 }
 
-void Patient::setLastName(std::string _lastName) {
-	Patient::lastName = _lastName;
+void Patient::setTimeAdmited(int _hour, int _minute) {
+	timeAdmited.setHour(_hour);
+	timeAdmited.setMinute(_minute);
 }
 
-void Patient::setMiddleName(std::string _middleName) {
-	Patient::middleName = _middleName;
+void Patient::setMainSymptoms(std::string _mainSymptoms) {
+	mainSymptoms = _mainSymptoms;
 }
 
-std::string Patient::getFirstName() {
-	return Patient::firstName;
+void Patient::setCategoryNumber(int _categoryNumber) {
+	categoryNumber = _categoryNumber;
 }
 
-std::string Patient::getLastName() {
-	return Patient::lastName;
+
+
+std::string Patient::getHealthCareNumber() {
+	return Patient::healthCareNumber;
 }
 
-std::string Patient::getMiddleName() {
-	return Patient::middleName;
+std::string Patient::getTimeAdmited() {
+	return timeAdmited.returnTime();
 }
+
+std::string Patient::getMainSymptoms() {
+	return mainSymptoms;
+}
+
+int Patient::getCategoryNumber() {
+	return categoryNumber;
+}
+

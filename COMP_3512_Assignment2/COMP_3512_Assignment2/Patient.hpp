@@ -1,24 +1,26 @@
 #pragma once
 #include <iostream>
 #include <string>
-
+#include "Time.hpp"
+#include "Name.hpp"
+#include "Date.hpp"
 
 class Patient {
 private:
-	std::string firstName;
-	std::string lastName;
-	std::string middleName;
-	int yearOfBirth;
-	int monthOfBirth;
-	int dayOfBirth;
+	Name myName;
+	Date birthday;
+	Time timeAdmited;
 	std::string healthCareNumber;
-
+	std::string mainSymptoms;
+	int categoryNumber;
 public:
 	Patient();
-	void setFirstName(std::string);
-	void setLastName(std::string);
-	void setMiddleName(std::string);
-	std::string getFirstName();
-	std::string getLastName();
-	std::string getMiddleName();
+	void setHealthCareNumber(std::string);
+	void setTimeAdmited(int, int);
+	void setMainSymptoms(std::string);
+	void setCategoryNumber(int);
+	std::string getHealthCareNumber();
+	std::string getTimeAdmited();
+	std::string getMainSymptoms();
+	int getCategoryNumber();
 };
