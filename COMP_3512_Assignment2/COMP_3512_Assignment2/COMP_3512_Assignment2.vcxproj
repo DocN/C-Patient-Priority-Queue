@@ -116,6 +116,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Time.cpp" />
     <ClCompile Include="Date.cpp" />
     <ClCompile Include="Name.cpp" />
@@ -123,6 +124,7 @@
     <ClCompile Include="Tester.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Menu.hpp" />
     <ClInclude Include="Time.hpp" />
     <ClInclude Include="Date.hpp" />
     <ClInclude Include="Name.hpp" />

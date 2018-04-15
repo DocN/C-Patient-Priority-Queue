@@ -1,6 +1,7 @@
 #include "Patient.hpp"
 
 Patient::Patient() {
+	this->myName = Name();
 
 }
 

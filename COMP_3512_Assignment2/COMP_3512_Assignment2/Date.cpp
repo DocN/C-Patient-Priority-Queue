@@ -1,5 +1,9 @@
 #include "Date.hpp"
 
+Date::Date() {
+
+}
+
 Date::Date(int _month, int _day, int _year) {
 	setMonthOfBirth(_month);
 	setDayOfBirth(_day);

@@ -5,6 +5,7 @@ private:
 	int monthOfBirth;
 	int dayOfBirth;
 public:
+	Date();
 	Date(int, int, int);
 	void setYearOfBirth(int);
 	void setMonthOfBirth(int);
