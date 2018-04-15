@@ -7,6 +7,7 @@
 using namespace std;
 
 
+
 int main() {
 	//Time test = Time(9,60);
 	//Time testw = Time();
@@ -14,4 +15,5 @@ int main() {
 	system("pause");
 	return 0;
 }
+
 

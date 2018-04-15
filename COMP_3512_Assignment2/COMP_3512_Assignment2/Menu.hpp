@@ -6,6 +6,7 @@
 class Menu {
 private:
 	std::vector<std::string> mainMenu;
+	std::vector<std::string> critMenu;
 	std::vector<std::vector<std::string>> menuSelection;
 	int const SUB_MENUA_INDEX = 0;
 	int const SUB_MENUB_INDEX = 1;
@@ -32,12 +33,16 @@ public:
 	void generateMainMenu();
 	void generateSubMenus();
 	void generateSubMenuA();
+	void generateCriticalMenu();
+	void printCriticalMenu();
 	void generateSubMenuB();
 	void generateSubMenuC();
 	void generateSubMenuD();
 	void generateSubMenuE();
 	void generateSubMenuF();
 	void generateSubMenuG();
+
+
 
 	void printMainMenu();
 	bool pickMainMenu(char);

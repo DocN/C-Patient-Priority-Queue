@@ -5,6 +5,7 @@
 Menu::Menu() {
 	this->generateMainMenu();
 	this->generateSubMenus();
+	this->generateCriticalMenu();
 	this->printMainMenu();
 }
 
@@ -99,6 +100,7 @@ bool Menu::pickMainMenu(char selected) {
 					}
 				}
 				else if (i == SYMPTOM_INDEX) {
+					this->printCriticalMenu();
 					currentPatient.setMainSymptoms(value);
 				}	
 				else if (i == CATEGORY_INDEX) {
@@ -192,6 +194,20 @@ void Menu::generateSubMenuA() {
 	menuSelection.push_back(menuA);
 }
 
+void Menu::generateCriticalMenu() {
+	critMenu.push_back("(1) Critical and life-threatening, requires immediate care");
+	critMenu.push_back("(2) Critical, requires care very soon");
+	critMenu.push_back("(3) Serious, requires care soon");
+	critMenu.push_back("(4) Serious");
+	critMenu.push_back("(5) Non-serious");
+	critMenu.push_back("(6) Not a priority");
+}
+
+void Menu::printCriticalMenu() {
+	for (int i = 0; i < critMenu.size(); i++) {
+		std::cout << critMenu.at(i) << std::endl;
+	}
+}
 void Menu::generateSubMenuB() {
 
 }
