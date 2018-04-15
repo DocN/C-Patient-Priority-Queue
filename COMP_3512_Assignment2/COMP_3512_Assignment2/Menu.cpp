@@ -19,39 +19,44 @@ bool Menu::pickMainMenu(char selected) {
 				std::cin >> value;
 				try {
 					if (i == LAST_NAME_INDEX) {
-						currentPatient.getName()->setLastName(value);
+						currentPatient.getName().setLastName(value);
+						repeat = false;
 					}
 					else if (i == FIRST_NAME_INDEX) {
-						currentPatient.getName()->setFirstName(value);
+						currentPatient.getName().setFirstName(value);
+						repeat = false;
 					}
 					else if (i == MIDDLE_NAME_IDNEX) {
-						currentPatient.getName()->setMiddleName(value);
-						std::cout << currentPatient.getName()->getFullName() << std::endl;
+						currentPatient.getName().setMiddleName(value);
+						repeat = false;
 					}
 					else if (i == YEAR_INDEX) {
 						try {
-							currentPatient.getBirthday()->setYearOfBirth(stringToInt(value));
+							currentPatient.getBirthday().setYearOfBirth(stringToInt(value));
 						}
-						catch (std::exception e) {
-
+						catch (const char* msg) {
+							repeat = true;
 						}
 					}
 					else if (i == MONTH_INDEX) {
-
+						currentPatient.getBirthday().setMonthOfBirth(stringToInt(value));
+						repeat = false;
 					}
 					else if (i == DAY_INDEX) {
-
+						currentPatient.getBirthday().setDayOfBirth(stringToInt(value));
+						repeat = false;
 					}
 					else if (i == CARE_NUMBER_INDEX) {
-
+						repeat = false;
 					}
 					else if (i == TIME_INDEX) {
 						//currentPatient.getTimeAdmitted().setDefaultTime();
+						repeat = false;
 					}
 					else if (i == CATEGORY_INDEX) {
-
+						repeat = false;
 					}
-					repeat = false;
+					
 				}
 				catch (std::exception& e) {
 					std::cout << "ERROR- " << e.what() << std::endl;
@@ -144,6 +149,9 @@ int Menu::stringToInt(std::string myStr) {
 	int inteVal;
 	std::istringstream buffer(myStr);
 	buffer >> inteVal;
+	if (inteVal < 0) {
+		throw "Invalid birthday exception";
+	}
 	return inteVal;
 }
 

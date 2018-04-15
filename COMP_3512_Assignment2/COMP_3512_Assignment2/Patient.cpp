@@ -1,8 +1,8 @@
 #include "Patient.hpp"
 #include <string>
 Patient::Patient() {
-	myName = new Name();
-	birthday = new Date();
+	myName = Name();
+	birthday = Date();
 }
 
 void Patient::setHealthCareNumber(std::string _healthCareNumber) {
@@ -10,8 +10,8 @@ void Patient::setHealthCareNumber(std::string _healthCareNumber) {
 }
 
 void Patient::setTimeAdmited(int _hour, int _minute) {
-	timeAdmited->setHour(_hour);
-	timeAdmited->setMinute(_minute);
+	timeAdmited.setHour(_hour);
+	timeAdmited.setMinute(_minute);
 }
 
 void Patient::setMainSymptoms(std::string _mainSymptoms) {
@@ -27,7 +27,7 @@ std::string Patient::getHealthCareNumber() {
 }
 
 std::string Patient::getTimeAdmitedString() {
-	return timeAdmited->returnTime();
+	return timeAdmited.returnTime();
 }
 
 std::string Patient::getMainSymptoms() {
@@ -38,15 +38,15 @@ int Patient::getCategoryNumber() {
 	return categoryNumber;
 }
 
-Name * Patient::getName() {
+Name & Patient::getName() {
 	return myName;
 }
 
-Time* Patient::getTimeAdmitted() {
+Time & Patient::getTimeAdmitted() {
 	return timeAdmited;
 }
 
-Date* Patient::getBirthday() {
+Date & Patient::getBirthday() {
 	return birthday;
 }
 
