@@ -50,4 +50,5 @@ public:
 	void printMainMenu();
 	bool pickMainMenu(char);
 	int stringToInt(std::string);
+	void menuSelectionA();
 };

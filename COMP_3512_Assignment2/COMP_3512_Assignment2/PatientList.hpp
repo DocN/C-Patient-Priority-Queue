@@ -17,4 +17,6 @@ private:
 public:
 	PatientList();
 	void addPatient(Patient &);
+	void printPatients();
+
 };

@@ -13,118 +13,10 @@ Menu::Menu() {
 
 bool Menu::pickMainMenu(char selected) {
 	if (selected == 'a') {
-		Patient currentPatient;
-		for (int i = 0; i < menuSelection[SUB_MENUA_INDEX].size(); i++) {
-			bool repeat = true; 
-			std::string value;
-			while (repeat) {
-				repeat = false;
-				std::cout << menuSelection[SUB_MENUA_INDEX].at(i) << std::endl;
-				std::cin >> value;
-				if (i == LAST_NAME_INDEX) {
-					currentPatient.getName().setLastName(value);
-				}
-				else if (i == FIRST_NAME_INDEX) {
-					currentPatient.getName().setFirstName(value);
-				}
-				else if (i == MIDDLE_NAME_IDNEX) {
-					currentPatient.getName().setMiddleName(value);
-				}
-				else if (i == YEAR_INDEX) {
-					try {
-						currentPatient.getBirthday().setYearOfBirth(stringToInt(value));
-					}
-					catch (const std::string& ex) {
-						repeat = true;
-						std::cout << ex << std::endl;
-						
-					}
-					catch (...)
-					{
-						repeat = true;
-						std::cerr << "Error invalid year please enter a year between 1850 and 2018" << std::endl;
-					}
-				}
-				else if (i == MONTH_INDEX) {
-					try {
-						currentPatient.getBirthday().setMonthOfBirth(stringToInt(value));
-					}
-					catch (const std::string& ex) {
-						repeat = true;
-						std::cout << ex << std::endl;
-					}
-					catch (...)
-					{
-						repeat = true;
-						std::cerr << "Error invalid month! please enter a month between 1 and 12" << std::endl;
-					}
-				}
-				else if (i == DAY_INDEX) {
-					try {
-						currentPatient.getBirthday().setDayOfBirth(stringToInt(value));
-					}
-					catch (const std::string& ex) {
-						repeat = true;
-						std::cout << ex << std::endl;
-					}
-					catch (...)
-					{
-						std::cerr << "Error invalid day! please enter a day between 1 and 31" << std::endl;
-					}
-				}
-				else if (i == CARE_NUMBER_INDEX) {
-					try {
-						currentPatient.setHealthCareNumber(value);
-					}
-					catch (const std::string& ex) {
-						repeat = true;
-						std::cout << ex << std::endl;
-
-					}
-					catch (...)
-					{
-						repeat = true;
-						std::cerr << "Error invalid health card number! please enter an 8 digit card number" << std::endl;
-					}
-				}
-				else if (i == TIME_INDEX) {
-					try {
-						currentPatient.getTimeAdmitted().set24Time(value);
-					}
-					catch (const std::string& ex) {
-						repeat = true;
-						std::cout << ex << std::endl;
-					}
-					catch (...)
-					{
-						repeat = true;
-						std::cerr << "Error invalid time! Please enter in format 00:00" << std::endl;
-					}
-				}
-				else if (i == SYMPTOM_INDEX) {
-					this->printCriticalMenu();
-					currentPatient.setMainSymptoms(value);
-				}	
-				else if (i == CATEGORY_INDEX) {
-					try {
-						currentPatient.setCategoryNumber(stringToInt(value));
-					} 
-					catch (const std::string& ex) {
-						repeat = true;
-						std::cout << ex << std::endl;
-					}
-					catch (...)
-					{
-						repeat = true;
-						std::cerr << "Error category number! Please enter a category between 1-6" << std::endl;
-					}
-				}
-			}	
-		}
-		myPatients.addPatient(currentPatient);
+		menuSelectionA();
 	}
 	else if (selected == 'b') {
-
+		myPatients.printPatients();
 	}
 	else if (selected == 'c') {
 
@@ -148,6 +40,117 @@ bool Menu::pickMainMenu(char selected) {
 	return true;
 }
 
+void Menu::menuSelectionA() {
+	Patient currentPatient;
+	for (int i = 0; i < menuSelection[SUB_MENUA_INDEX].size(); i++) {
+		bool repeat = true;
+		std::string value;
+		while (repeat) {
+			repeat = false;
+			std::cout << menuSelection[SUB_MENUA_INDEX].at(i) << std::endl;
+			std::cin >> value;
+			if (i == LAST_NAME_INDEX) {
+				currentPatient.getName().setLastName(value);
+			}
+			else if (i == FIRST_NAME_INDEX) {
+				currentPatient.getName().setFirstName(value);
+			}
+			else if (i == MIDDLE_NAME_IDNEX) {
+				currentPatient.getName().setMiddleName(value);
+			}
+			else if (i == YEAR_INDEX) {
+				try {
+					currentPatient.getBirthday().setYearOfBirth(stringToInt(value));
+				}
+				catch (const std::string& ex) {
+					repeat = true;
+					std::cout << ex << std::endl;
+
+				}
+				catch (...)
+				{
+					repeat = true;
+					std::cerr << "Error invalid year please enter a year between 1850 and 2018" << std::endl;
+				}
+			}
+			else if (i == MONTH_INDEX) {
+				try {
+					currentPatient.getBirthday().setMonthOfBirth(stringToInt(value));
+				}
+				catch (const std::string& ex) {
+					repeat = true;
+					std::cout << ex << std::endl;
+				}
+				catch (...)
+				{
+					repeat = true;
+					std::cerr << "Error invalid month! please enter a month between 1 and 12" << std::endl;
+				}
+			}
+			else if (i == DAY_INDEX) {
+				try {
+					currentPatient.getBirthday().setDayOfBirth(stringToInt(value));
+				}
+				catch (const std::string& ex) {
+					repeat = true;
+					std::cout << ex << std::endl;
+				}
+				catch (...)
+				{
+					std::cerr << "Error invalid day! please enter a day between 1 and 31" << std::endl;
+				}
+			}
+			else if (i == CARE_NUMBER_INDEX) {
+				try {
+					currentPatient.setHealthCareNumber(value);
+				}
+				catch (const std::string& ex) {
+					repeat = true;
+					std::cout << ex << std::endl;
+
+				}
+				catch (...)
+				{
+					repeat = true;
+					std::cerr << "Error invalid health card number! please enter an 8 digit card number" << std::endl;
+				}
+			}
+			else if (i == TIME_INDEX) {
+				try {
+					currentPatient.getTimeAdmitted().set24Time(value);
+				}
+				catch (const std::string& ex) {
+					repeat = true;
+					std::cout << ex << std::endl;
+				}
+				catch (...)
+				{
+					repeat = true;
+					std::cerr << "Error invalid time! Please enter in format 00:00" << std::endl;
+				}
+			}
+			else if (i == SYMPTOM_INDEX) {
+				this->printCriticalMenu();
+				currentPatient.setMainSymptoms(value);
+			}
+			else if (i == CATEGORY_INDEX) {
+				try {
+					currentPatient.setCategoryNumber(stringToInt(value));
+				}
+				catch (const std::string& ex) {
+					repeat = true;
+					std::cout << ex << std::endl;
+				}
+				catch (...)
+				{
+					repeat = true;
+					std::cerr << "Error category number! Please enter a category between 1-6" << std::endl;
+				}
+			}
+		}
+	}
+	myPatients.addPatient(currentPatient);
+}
 void Menu::printMainMenu() {
 	char value;
 	bool repeater = true;
