@@ -15,4 +15,5 @@ class Name {
 		std::string getFirstName();
 		std::string getLastName();
 		std::string getMiddleName();
+		std::string getFullName();
 };

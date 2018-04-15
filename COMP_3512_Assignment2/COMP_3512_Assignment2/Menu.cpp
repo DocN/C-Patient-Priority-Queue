@@ -1,7 +1,7 @@
 #include "Menu.hpp"
 #include "Patient.hpp"
 #include <string>
-
+#include <sstream>
 Menu::Menu() {
 	this->generateMainMenu();
 	this->generateSubMenus();
@@ -10,18 +10,51 @@ Menu::Menu() {
 
 bool Menu::pickMainMenu(char selected) {
 	if (selected == 'a') {
-		for (int i = 0; i < menuSelection[0].size(); i++) {
-			Patient currentPatient = Patient();
+		Patient currentPatient = Patient();
+		for (int i = 0; i < menuSelection[SUB_MENUA_INDEX].size(); i++) {
 			bool repeat = true; 
 			std::string value;
 			while (repeat) {
-				std::cout << menuSelection[0].at(i) << std::endl;
+				std::cout << menuSelection[SUB_MENUA_INDEX].at(i) << std::endl;
 				std::cin >> value;
 				try {
+					if (i == LAST_NAME_INDEX) {
+						currentPatient.getName()->setLastName(value);
+					}
+					else if (i == FIRST_NAME_INDEX) {
+						currentPatient.getName()->setFirstName(value);
+					}
+					else if (i == MIDDLE_NAME_IDNEX) {
+						currentPatient.getName()->setMiddleName(value);
+						std::cout << currentPatient.getName()->getFullName() << std::endl;
+					}
+					else if (i == YEAR_INDEX) {
+						try {
+							currentPatient.getBirthday()->setYearOfBirth(stringToInt(value));
+						}
+						catch (std::exception e) {
+
+						}
+					}
+					else if (i == MONTH_INDEX) {
+
+					}
+					else if (i == DAY_INDEX) {
+
+					}
+					else if (i == CARE_NUMBER_INDEX) {
+
+					}
+					else if (i == TIME_INDEX) {
+						//currentPatient.getTimeAdmitted().setDefaultTime();
+					}
+					else if (i == CATEGORY_INDEX) {
+
+					}
 					repeat = false;
 				}
-				catch (std::exception &e) {
-					std::cout << "ERROR- " + e.what() << std::endl;
+				catch (std::exception& e) {
+					std::cout << "ERROR- " << e.what() << std::endl;
 					repeat = true;
 				}
 				
@@ -45,7 +78,8 @@ bool Menu::pickMainMenu(char selected) {
 
 	}
 	else if (selected == 'g') {
-
+		//terminate program
+		std::exit(0);
 	}
 	else {
 		return false;
@@ -104,6 +138,13 @@ void Menu::generateSubMenuA() {
 
 void Menu::generateSubMenuB() {
 
+}
+
+int Menu::stringToInt(std::string myStr) {
+	int inteVal;
+	std::istringstream buffer(myStr);
+	buffer >> inteVal;
+	return inteVal;
 }
 
 

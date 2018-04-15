@@ -7,20 +7,23 @@
 
 class Patient {
 private:
-	Name myName;
-	Date birthday;
-	Time timeAdmited;
+	Name * myName;
+	Date * birthday;
+	Time * timeAdmited;
 	std::string healthCareNumber;
 	std::string mainSymptoms;
 	int categoryNumber;
 public:
 	Patient();
+	Name * getName();
+	Time * getTimeAdmitted();
 	void setHealthCareNumber(std::string);
 	void setTimeAdmited(int, int);
 	void setMainSymptoms(std::string);
 	void setCategoryNumber(int);
 	std::string getHealthCareNumber();
-	std::string getTimeAdmited();
+	std::string getTimeAdmitedString();
 	std::string getMainSymptoms();
 	int getCategoryNumber();
+	Date * getBirthday();
 };
