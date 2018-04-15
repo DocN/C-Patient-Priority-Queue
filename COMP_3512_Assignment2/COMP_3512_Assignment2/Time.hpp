@@ -26,4 +26,6 @@ public:
 	std::string returnTime();
 	void set24Time(std::string);
 	int stringToInt(std::string myStr);
+	friend void swap(Time& t1, Time& t2);
+	Time& operator=(Time t);
 };

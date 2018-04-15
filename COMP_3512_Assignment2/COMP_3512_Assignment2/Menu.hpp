@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include "PatientList.hpp"
 
 class Menu {
 private:
@@ -26,6 +27,8 @@ private:
 	int const TIME_INDEX = 7;
 	int const SYMPTOM_INDEX = 8;
 	int const CATEGORY_INDEX = 9;
+
+	PatientList myPatients;
 
 
 public:

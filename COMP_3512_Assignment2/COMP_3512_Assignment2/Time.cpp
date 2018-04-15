@@ -73,5 +73,17 @@ int Time::stringToInt(std::string myStr) {
 	return inteVal;
 }
 
+void swap(Time& t1, Time& t2) {
+	std::swap(t1.hour, t2.hour);
+	std::swap(t1.minute, t2.minute);
+};
+
+Time& Time::operator=(Time t) {
+	swap(*this, t);
+	return *this;
+}
+
+
+
 
 

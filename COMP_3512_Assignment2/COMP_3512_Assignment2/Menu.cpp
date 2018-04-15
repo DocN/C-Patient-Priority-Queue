@@ -2,16 +2,18 @@
 #include "Patient.hpp"
 #include <string>
 #include <sstream>
+
 Menu::Menu() {
 	this->generateMainMenu();
 	this->generateSubMenus();
 	this->generateCriticalMenu();
 	this->printMainMenu();
+
 }
 
 bool Menu::pickMainMenu(char selected) {
 	if (selected == 'a') {
-		Patient currentPatient = Patient();
+		Patient currentPatient;
 		for (int i = 0; i < menuSelection[SUB_MENUA_INDEX].size(); i++) {
 			bool repeat = true; 
 			std::string value;
@@ -119,6 +121,7 @@ bool Menu::pickMainMenu(char selected) {
 				}
 			}	
 		}
+		myPatients.addPatient(currentPatient);
 	}
 	else if (selected == 'b') {
 

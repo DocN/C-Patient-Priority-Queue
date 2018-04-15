@@ -67,3 +67,21 @@ bool Patient::is_digits(const std::string &str)
 	return std::all_of(str.begin(), str.end(), ::isdigit); // C++11
 }
 
+void swap(Patient& p1, Patient& p2) {
+	std::swap(p1.myName, p2.myName);
+	std::swap(p1.birthday, p2.birthday);
+	std::swap(p1.timeAdmited, p2.timeAdmited);
+	std::swap(p1.healthCareNumber, p2.healthCareNumber);
+	std::swap(p1.mainSymptoms, p2.mainSymptoms);
+	std::swap(p1.categoryNumber, p2.categoryNumber);
+};
+
+Patient& Patient::operator=(Patient p) {
+	swap(*this, p);
+	return *this;
+}
+
+bool operator> (const Patient &p1, const Patient &p2) {
+	return false;
+}
+

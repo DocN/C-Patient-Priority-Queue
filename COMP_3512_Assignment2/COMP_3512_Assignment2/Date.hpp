@@ -22,4 +22,6 @@ public:
 	int getYearOfBirth();
 	int getMonthOfBirth();
 	int getDayOfBirth();
+	friend void swap(Date& d1, Date& d2);
+	Date& operator=(Date d);
 };

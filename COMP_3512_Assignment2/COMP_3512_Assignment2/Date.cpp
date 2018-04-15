@@ -46,3 +46,14 @@ void Date::setDayOfBirth(int _dayOfBirth) {
 	}
 	throw "Invalid day of birth! please select a day between " + std::to_string(BEGIN_DAY) + "-" + std::to_string(END_DAY);
 }
+
+void swap(Date& d1, Date& d2) {
+	std::swap(d1.yearOfBirth, d2.yearOfBirth);
+	std::swap(d1.monthOfBirth, d2.monthOfBirth);
+	std::swap(d1.dayOfBirth, d2.dayOfBirth);
+};
+
+Date& Date::operator=(Date d) {
+	swap(*this, d);
+	return *this;
+}
