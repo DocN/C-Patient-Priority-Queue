@@ -13,6 +13,8 @@ private:
 	std::string healthCareNumber;
 	std::string mainSymptoms;
 	int categoryNumber;
+	const int BEGIN_CATEGORY = 1;
+	const int END_CATEGORY = 6;
 public:
 	Patient();
 	Name& getName();
@@ -26,4 +28,5 @@ public:
 	std::string getMainSymptoms();
 	int getCategoryNumber();
 	Date & getBirthday();
+	bool is_digits(const std::string &str);
 };

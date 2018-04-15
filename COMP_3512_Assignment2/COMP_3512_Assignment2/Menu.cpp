@@ -15,56 +15,107 @@ bool Menu::pickMainMenu(char selected) {
 			bool repeat = true; 
 			std::string value;
 			while (repeat) {
+				repeat = false;
 				std::cout << menuSelection[SUB_MENUA_INDEX].at(i) << std::endl;
 				std::cin >> value;
-				try {
-					if (i == LAST_NAME_INDEX) {
-						currentPatient.getName().setLastName(value);
-						repeat = false;
+				if (i == LAST_NAME_INDEX) {
+					currentPatient.getName().setLastName(value);
+				}
+				else if (i == FIRST_NAME_INDEX) {
+					currentPatient.getName().setFirstName(value);
+				}
+				else if (i == MIDDLE_NAME_IDNEX) {
+					currentPatient.getName().setMiddleName(value);
+				}
+				else if (i == YEAR_INDEX) {
+					try {
+						currentPatient.getBirthday().setYearOfBirth(stringToInt(value));
 					}
-					else if (i == FIRST_NAME_INDEX) {
-						currentPatient.getName().setFirstName(value);
-						repeat = false;
+					catch (const std::string& ex) {
+						repeat = true;
+						std::cout << ex << std::endl;
+						
 					}
-					else if (i == MIDDLE_NAME_IDNEX) {
-						currentPatient.getName().setMiddleName(value);
-						repeat = false;
+					catch (...)
+					{
+						repeat = true;
+						std::cerr << "Error invalid year please enter a year between 1850 and 2018" << std::endl;
 					}
-					else if (i == YEAR_INDEX) {
-						try {
-							currentPatient.getBirthday().setYearOfBirth(stringToInt(value));
-						}
-						catch (const char* msg) {
-							repeat = true;
-						}
-					}
-					else if (i == MONTH_INDEX) {
+				}
+				else if (i == MONTH_INDEX) {
+					try {
 						currentPatient.getBirthday().setMonthOfBirth(stringToInt(value));
-						repeat = false;
 					}
-					else if (i == DAY_INDEX) {
+					catch (const std::string& ex) {
+						repeat = true;
+						std::cout << ex << std::endl;
+					}
+					catch (...)
+					{
+						repeat = true;
+						std::cerr << "Error invalid month! please enter a month between 1 and 12" << std::endl;
+					}
+				}
+				else if (i == DAY_INDEX) {
+					try {
 						currentPatient.getBirthday().setDayOfBirth(stringToInt(value));
-						repeat = false;
 					}
-					else if (i == CARE_NUMBER_INDEX) {
-						repeat = false;
+					catch (const std::string& ex) {
+						repeat = true;
+						std::cout << ex << std::endl;
 					}
-					else if (i == TIME_INDEX) {
-						//currentPatient.getTimeAdmitted().setDefaultTime();
-						repeat = false;
+					catch (...)
+					{
+						std::cerr << "Error invalid day! please enter a day between 1 and 31" << std::endl;
 					}
-					else if (i == CATEGORY_INDEX) {
-						repeat = false;
-					}
-					
 				}
-				catch (std::exception& e) {
-					std::cout << "ERROR- " << e.what() << std::endl;
-					repeat = true;
+				else if (i == CARE_NUMBER_INDEX) {
+					try {
+						currentPatient.setHealthCareNumber(value);
+					}
+					catch (const std::string& ex) {
+						repeat = true;
+						std::cout << ex << std::endl;
+
+					}
+					catch (...)
+					{
+						repeat = true;
+						std::cerr << "Error invalid health card number! please enter an 8 digit card number" << std::endl;
+					}
 				}
-				
-			}
-			
+				else if (i == TIME_INDEX) {
+					try {
+						currentPatient.getTimeAdmitted().set24Time(value);
+					}
+					catch (const std::string& ex) {
+						repeat = true;
+						std::cout << ex << std::endl;
+					}
+					catch (...)
+					{
+						repeat = true;
+						std::cerr << "Error invalid time! Please enter in format 00:00" << std::endl;
+					}
+				}
+				else if (i == SYMPTOM_INDEX) {
+					currentPatient.setMainSymptoms(value);
+				}	
+				else if (i == CATEGORY_INDEX) {
+					try {
+						currentPatient.setCategoryNumber(stringToInt(value));
+					} 
+					catch (const std::string& ex) {
+						repeat = true;
+						std::cout << ex << std::endl;
+					}
+					catch (...)
+					{
+						repeat = true;
+						std::cerr << "Error category number! Please enter a category between 1-6" << std::endl;
+					}
+				}
+			}	
 		}
 	}
 	else if (selected == 'b') {
@@ -89,7 +140,7 @@ bool Menu::pickMainMenu(char selected) {
 	else {
 		return false;
 	}
-
+	return true;
 }
 
 void Menu::printMainMenu() {
@@ -135,7 +186,7 @@ void Menu::generateSubMenuA() {
 	menuA.push_back("Enter Month of Birth");
 	menuA.push_back("Enter Day of Birth");
 	menuA.push_back("Enter Personal Healthcare Number");
-	menuA.push_back("Enter Time Admitted in Format 24:00");
+	menuA.push_back("Enter Time Admitted in Format 24 hour 00:00");
 	menuA.push_back("Enter Main symptoms(s)");
 	menuA.push_back("Enter Category number");
 	menuSelection.push_back(menuA);
@@ -150,7 +201,7 @@ int Menu::stringToInt(std::string myStr) {
 	std::istringstream buffer(myStr);
 	buffer >> inteVal;
 	if (inteVal < 0) {
-		throw "Invalid birthday exception";
+		throw "Invalid number exception";
 	}
 	return inteVal;
 }
