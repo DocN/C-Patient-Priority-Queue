@@ -85,3 +85,19 @@ bool operator> (const Patient &p1, const Patient &p2) {
 	return false;
 }
 
+std::ostream& operator<<(std::ostream& os, Patient& myPatient)
+{
+
+	os << "=============================================" << std::endl;
+	os << "Name: " << myPatient.getName().getFullName() << std::endl;
+	os << "Health #: " << myPatient.getHealthCareNumber() << std::endl;
+	os << "Time Admitted " << myPatient.getTimeAdmitedString() << std::endl;
+	os << "Date of Birth " << myPatient.getBirthday() << std::endl;
+	os << "Symptoms " << myPatient.getMainSymptoms() << std::endl;
+	os << "Seriousness Level " << myPatient.getCategoryNumber() << std::endl;
+	os << "=============================================" << std::endl;
+
+	return os;
+}
+
+

@@ -12,25 +12,28 @@ Menu::Menu() {
 }
 
 bool Menu::pickMainMenu(char selected) {
-	if (selected == 'a') {
+	if (selected == '1') {
+		//add new patient
 		menuSelectionA();
 	}
-	else if (selected == 'b') {
+	else if (selected == '2') {
+		//get next patient
+		myPatients.getNextPatient();
+	}
+	else if (selected == '3') {
+		//change patient category
+	}
+	else if (selected == '4') {
+		//save 
+	}
+	else if (selected == '5') {
+		//load
+	}
+	else if (selected == '6') {
+		//print patients
 		myPatients.printPatients();
 	}
-	else if (selected == 'c') {
-
-	}
-	else if (selected == 'd') {
-
-	}
-	else if (selected == 'e') {
-
-	}
-	else if (selected == 'f') {
-
-	}
-	else if (selected == 'g') {
+	else if (selected == '7') {
 		//terminate program
 		std::exit(0);
 	}
@@ -118,6 +121,9 @@ void Menu::menuSelectionA() {
 			else if (i == TIME_INDEX) {
 				try {
 					currentPatient.getTimeAdmitted().set24Time(value);
+					if (!myPatients.compareTime(currentPatient.getTimeAdmitted())) {
+						throw "Time must be greater or equal to the previous patient's admitted time";
+					}
 				}
 				catch (const std::string& ex) {
 					repeat = true;
@@ -172,13 +178,15 @@ void Menu::printMainMenu() {
 }
 
 void Menu::generateMainMenu() {
-	mainMenu.push_back("(a). Add new patient");
-	mainMenu.push_back("(b). Get next patient");
-	mainMenu.push_back("(c). Change patient category");
-	mainMenu.push_back("(d). Save patient list");
-	mainMenu.push_back("(e). Load patient list");
-	mainMenu.push_back("(f). Print patient list");
-	mainMenu.push_back("(g). Exit program");
+	mainMenu.push_back("============== Main menu ==============");
+	mainMenu.push_back("(1). Add new patient");
+	mainMenu.push_back("(2). Get next patient");
+	mainMenu.push_back("(3). Change patient category");
+	mainMenu.push_back("(4). Save patient list");
+	mainMenu.push_back("(5). Load patient list");
+	mainMenu.push_back("(6). Print patient list");
+	mainMenu.push_back("(7). Exit program");
+	mainMenu.push_back("=======================================");
 }
 
 void Menu::generateSubMenus() {
@@ -223,7 +231,7 @@ int Menu::stringToInt(std::string myStr) {
 	std::istringstream buffer(myStr);
 	buffer >> inteVal;
 	if (inteVal < 0) {
-		throw "Invalid number exception";
+		throw "Invalid (integer) number exception";
 	}
 	return inteVal;
 }

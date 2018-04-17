@@ -32,4 +32,5 @@ public:
 	friend bool operator> (const Patient &p1, const Patient &p2);
 	friend void swap(Patient& p1, Patient& p2);
 	Patient& operator=(Patient p);
+	friend std::ostream& operator<<(std::ostream& os, Patient&);
 };

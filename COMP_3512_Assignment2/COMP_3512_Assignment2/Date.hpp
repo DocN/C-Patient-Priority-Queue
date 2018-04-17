@@ -1,4 +1,5 @@
 #pragma once
+#include <iostream>
 class Date {
 private:
 	int yearOfBirth;
@@ -24,4 +25,5 @@ public:
 	int getDayOfBirth();
 	friend void swap(Date& d1, Date& d2);
 	Date& operator=(Date d);
+	friend std::ostream& operator<<(std::ostream& os, Date&);
 };

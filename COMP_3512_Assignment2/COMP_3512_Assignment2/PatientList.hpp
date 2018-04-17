@@ -14,9 +14,12 @@ bool static compare(Patient p1, Patient p2) {
 class PatientList {
 private:
 	std::priority_queue<Patient, std::vector<Patient>, comp> pList{ compare };
+	Time currentTime;
 public:
 	PatientList();
 	void addPatient(Patient &);
 	void printPatients();
-
+	void getNextPatient();
+	void updateTime(Time newTime);
+	bool compareTime(Time);
 };

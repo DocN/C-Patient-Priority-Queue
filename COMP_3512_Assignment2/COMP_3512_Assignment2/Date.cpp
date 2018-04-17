@@ -57,3 +57,8 @@ Date& Date::operator=(Date d) {
 	swap(*this, d);
 	return *this;
 }
+
+std::ostream& operator<<(std::ostream& os, Date& currentDate) {
+	os << currentDate.getMonthOfBirth() << "/" << currentDate.getDayOfBirth() << currentDate.getYearOfBirth();
+	return os;
+}

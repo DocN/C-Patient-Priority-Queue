@@ -24,11 +24,13 @@ void Time::setDefaultTime() {
 
 void Time::set24Time(std::string myTime) {
 	if (myTime.length() == 5) {
-		std::string hourString = myTime.substr(TIME_INDEX_HOUR, TIME_SIZE);
-		std::string minuteString = myTime.substr(TIME_INDEX_MIN, TIME_SIZE);
-		setHour(std::atoi(hourString.c_str()));
-		setMinute(std::atoi(minuteString.c_str()));
-		return;
+		if (myTime[2] == ':') {
+			std::string hourString = myTime.substr(TIME_INDEX_HOUR, TIME_SIZE);
+			std::string minuteString = myTime.substr(TIME_INDEX_MIN, TIME_SIZE);
+			setHour(std::atoi(hourString.c_str()));
+			setMinute(std::atoi(minuteString.c_str()));
+			return;
+		}
 	}
 	throw "Invalid format! please use 00:00 format";
 }
@@ -81,6 +83,26 @@ void swap(Time& t1, Time& t2) {
 Time& Time::operator=(Time t) {
 	swap(*this, t);
 	return *this;
+}
+
+bool operator>=(Time t1, Time t2) {
+	if (t1.getHour() > t2.getHour()) {
+		return true;
+	}
+	else if (t1.getHour() == t2.getHour()) {
+		if (t1.getMinute() > t2.getMinute()) {
+			return true;
+		}
+		else if (t1.getMinute() == t2.getMinute()) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	else {
+		return false;
+	}
 }
 
 
