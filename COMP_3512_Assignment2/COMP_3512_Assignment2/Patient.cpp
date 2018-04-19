@@ -81,7 +81,23 @@ Patient& Patient::operator=(Patient p) {
 	return *this;
 }
 
-bool operator> (const Patient &p1, const Patient &p2) {
+bool operator> (Patient &p1, Patient &p2) {
+	//when p1 is higher priority than p2 return true right away
+	if (p1.getCategoryNumber() > p2.getCategoryNumber()) {
+		return true;
+	}
+	else if(p1.getCategoryNumber() < p2.getCategoryNumber()) {
+		return false;
+	}
+	//equal condition
+	else {
+		if (p1.getTimeAdmitted() >= p2.getTimeAdmitted()) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
 	return false;
 }
 

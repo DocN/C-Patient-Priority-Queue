@@ -47,7 +47,7 @@ int Time::getHour() {
 }
 
 void Time::setMinute(int _minute) {
-	if (_minute >= BEGIN_MIN && _minute <= END_HOUR) {
+	if (_minute >= BEGIN_MIN && _minute <= END_MIN) {
 		minute = _minute;
 		return;
 	}
@@ -104,6 +104,29 @@ bool operator>=(Time t1, Time t2) {
 		return false;
 	}
 }
+
+Time Time::getTimeDifference(Time currentTime) {
+	//t1 used for currentTime  and t2 used for time we're evaluating against
+	int currentHour = currentTime.getHour();
+	int currentMin = currentTime.getMinute();
+
+	int newHour = currentHour - getHour();
+	int newMin = 0;
+	//check if we need to pull from hours
+	if (currentTime.getMinute() >= getMinute()) {
+		newMin = (currentTime.getMinute() - getMinute());
+	}
+	else {
+		newMin = 60 + currentTime.getMinute();
+		newMin = newMin - getMinute();
+		newHour--;
+	}
+	Time newTime;
+	newTime.setHour(newHour);
+	newTime.setMinute(newMin);
+	return newTime;
+}
+
 
 
 

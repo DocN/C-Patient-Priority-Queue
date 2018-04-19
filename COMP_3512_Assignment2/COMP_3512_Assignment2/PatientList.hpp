@@ -22,4 +22,8 @@ public:
 	void getNextPatient();
 	void updateTime(Time newTime);
 	bool compareTime(Time);
+	int getPatientCategory(std::string);
+	int getPatientIndex(std::vector<Patient> tempList, std::string healthKey);
+	void setCategoryID(int, std::string);
+	void promoteQueue();
 };

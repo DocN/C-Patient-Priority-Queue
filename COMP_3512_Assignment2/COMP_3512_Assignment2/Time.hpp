@@ -29,4 +29,5 @@ public:
 	friend void swap(Time& t1, Time& t2);
 	Time& operator=(Time t);
 	friend bool operator>=(Time t1, Time t2);
+	Time getTimeDifference(Time);
 };

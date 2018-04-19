@@ -22,6 +22,7 @@ bool Menu::pickMainMenu(char selected) {
 	}
 	else if (selected == '3') {
 		//change patient category
+		changePatientCategoryMenu();
 	}
 	else if (selected == '4') {
 		//save 
@@ -42,7 +43,6 @@ bool Menu::pickMainMenu(char selected) {
 	}
 	return true;
 }
-
 void Menu::menuSelectionA() {
 	Patient currentPatient;
 	for (int i = 0; i < menuSelection[SUB_MENUA_INDEX].size(); i++) {
@@ -141,7 +141,11 @@ void Menu::menuSelectionA() {
 			}
 			else if (i == CATEGORY_INDEX) {
 				try {
-					currentPatient.setCategoryNumber(stringToInt(value));
+					int potentialCategoryID = stringToInt(value);
+					if (potentialCategoryID < MIN_CATEGORY_ID || potentialCategoryID > MAX_CATEGORY_ID) {
+						throw "invalid category id, please enter an id between 1-6";
+					}
+					currentPatient.setCategoryNumber(potentialCategoryID);
 				}
 				catch (const std::string& ex) {
 					repeat = true;
@@ -156,7 +160,64 @@ void Menu::menuSelectionA() {
 		}
 	}
 	myPatients.addPatient(currentPatient);
+	myPatients.promoteQueue();
 }
+
+void Menu::changePatientCategoryMenu() {
+	bool repeat = true;
+	std::string value;
+	while (repeat) {
+		try {
+			std::cout << "Please enter health care number of patient you wish to change " << std::endl;
+			std::cin >> value;
+			checkValidHealthCare(value);
+			std::string currentHealthNumber = value;
+			int currentPatientCategory = myPatients.getPatientCategory(value);
+			//check if the patient is actually in the list
+			if (currentPatientCategory == -1) {
+				std::cout << std::endl << "patient with id " << value << " not found! " << std::endl  << std::endl;
+				return;
+			}
+			std::cout << "=====Patient Health # " << value << "============" << std::endl;
+			std::cout << "Current patient condition: " << critMenu.at(currentPatientCategory - 1) << std::endl;
+			std::cout << "===========================================" << std::endl << std::endl;
+			try {
+				std::cout << "=================================================" << std::endl;
+				printCriticalMenu();
+				std::cout << "Please enter new patient category " << std::endl;
+				std::cin >> value;
+				int potentialCategoryID = stringToInt(value);
+				if (potentialCategoryID < MIN_CATEGORY_ID || potentialCategoryID > MAX_CATEGORY_ID) {
+					throw "invalid category id, please enter an id between 1-6";
+				}
+				myPatients.setCategoryID(potentialCategoryID, currentHealthNumber);
+				std::cout << "Successfully changed patient category to  " << potentialCategoryID << std::endl;
+				repeat = false;
+			}
+			catch (const std::string& ex) {
+				repeat = true;
+				std::cout << ex << std::endl;
+
+			}
+			catch (...)
+			{
+				repeat = true;
+				std::cerr << "Error invalid category ID, please try again" << std::endl;
+			}
+		}
+		catch (const std::string& ex) {
+			repeat = true;
+			std::cout << ex << std::endl;
+
+		}
+		catch (...)
+		{
+			repeat = true;
+			std::cerr << "Error invalid health card number! please enter an 8 digit card number" << std::endl;
+		}
+	}
+}
+
 void Menu::printMainMenu() {
 	char value;
 	bool repeater = true;
@@ -234,6 +295,27 @@ int Menu::stringToInt(std::string myStr) {
 		throw "Invalid (integer) number exception";
 	}
 	return inteVal;
+}
+
+void Menu::checkValidHealthCare(std::string healthcareNumber) {
+	//check length and check if the healthcare number is all numbers
+	if (healthcareNumber.length() == 8) {
+		if (is_digits(healthcareNumber)) {
+			return;
+		}
+		else {
+			throw "Invalid health care number, please enter all digits with length 8";
+		}
+	}
+	else {
+		throw "Invalid health care number, please enter all digits with length 8";
+	}
+}
+
+
+bool Menu::is_digits(const std::string &str)
+{
+	return std::all_of(str.begin(), str.end(), ::isdigit); // C++11
 }
 
 

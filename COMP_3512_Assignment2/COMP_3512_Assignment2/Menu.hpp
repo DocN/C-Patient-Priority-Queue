@@ -28,6 +28,8 @@ private:
 	int const SYMPTOM_INDEX = 8;
 	int const CATEGORY_INDEX = 9;
 
+	int const MIN_CATEGORY_ID = 1;
+	int const MAX_CATEGORY_ID = 6;
 	PatientList myPatients;
 
 
@@ -38,6 +40,9 @@ public:
 	void generateSubMenuA();
 	void generateCriticalMenu();
 	void printCriticalMenu();
+	void changePatientCategoryMenu();
+	void checkValidHealthCare(std::string);
+	bool is_digits(const std::string &str);
 	void generateSubMenuB();
 	void generateSubMenuC();
 	void generateSubMenuD();

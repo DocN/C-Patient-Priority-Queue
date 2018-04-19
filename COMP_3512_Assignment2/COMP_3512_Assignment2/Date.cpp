@@ -59,6 +59,6 @@ Date& Date::operator=(Date d) {
 }
 
 std::ostream& operator<<(std::ostream& os, Date& currentDate) {
-	os << currentDate.getMonthOfBirth() << "/" << currentDate.getDayOfBirth() << currentDate.getYearOfBirth();
+	os << currentDate.getMonthOfBirth() << "/" << currentDate.getDayOfBirth() << "/" << currentDate.getYearOfBirth();
 	return os;
 }
