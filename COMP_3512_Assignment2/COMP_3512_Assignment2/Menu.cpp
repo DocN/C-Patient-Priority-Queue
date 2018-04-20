@@ -3,14 +3,22 @@
 #include <string>
 #include <sstream>
 
+/* Menu Default constructor - creates all our initial display menus
+*/
 Menu::Menu() {
+	//generate all our menus
 	this->generateMainMenu();
 	this->generateSubMenus();
 	this->generateCriticalMenu();
 	this->printMainMenu();
-
 }
 
+/*Menu::pickMainMenu(char selected) - display the menu user has selected
+Input:
+char selected - the char the user has selected from console
+Output:
+bool - completed menu boolean
+*/
 bool Menu::pickMainMenu(char selected) {
 	if (selected == '1') {
 		//add new patient
@@ -45,15 +53,28 @@ bool Menu::pickMainMenu(char selected) {
 	}
 	return true;
 }
+
+/*Menu::menuSelectionA() - The add patient menu
+Input:
+N/A
+Output:
+void
+*/
 void Menu::menuSelectionA() {
+	//create a new patient
 	Patient currentPatient;
+	//get all the data for a patient from the user
 	for (int i = 0; i < menuSelection[SUB_MENUA_INDEX].size(); i++) {
 		bool repeat = true;
 		std::string value;
+		//loop until we have our valid data
 		while (repeat) {
 			repeat = false;
+			//print out prompt
 			std::cout << menuSelection[SUB_MENUA_INDEX].at(i) << std::endl;
 			std::cin >> value;
+
+			//get the data and set it to the patient
 			if (i == LAST_NAME_INDEX) {
 				currentPatient.getName().setLastName(value);
 			}
@@ -64,6 +85,7 @@ void Menu::menuSelectionA() {
 				currentPatient.getName().setMiddleName(value);
 			}
 			else if (i == YEAR_INDEX) {
+				//attempt to set the birthday to see if data is valid
 				try {
 					currentPatient.getBirthday().setYearOfBirth(stringToInt(value));
 				}
@@ -79,6 +101,7 @@ void Menu::menuSelectionA() {
 				}
 			}
 			else if (i == MONTH_INDEX) {
+				//attempt to set the month to see if an error is thrown
 				try {
 					currentPatient.getBirthday().setMonthOfBirth(stringToInt(value));
 				}
@@ -93,6 +116,7 @@ void Menu::menuSelectionA() {
 				}
 			}
 			else if (i == DAY_INDEX) {
+				//attempt to set set the date to see if an error is thrown
 				try {
 					currentPatient.getBirthday().setDayOfBirth(stringToInt(value));
 				}
@@ -106,6 +130,7 @@ void Menu::menuSelectionA() {
 				}
 			}
 			else if (i == CARE_NUMBER_INDEX) {
+				//attempt to set the care card number to see if an error is thrown
 				try {
 					currentPatient.setHealthCareNumber(value);
 				}
@@ -121,6 +146,7 @@ void Menu::menuSelectionA() {
 				}
 			}
 			else if (i == TIME_INDEX) {
+				//attempt to set a time to see if an error is thrown
 				try {
 					currentPatient.getTimeAdmitted().set24Time(value);
 					if (!myPatients.compareTime(currentPatient.getTimeAdmitted())) {
@@ -134,11 +160,12 @@ void Menu::menuSelectionA() {
 				catch (...)
 				{
 					repeat = true;
-					std::cerr << "Error invalid time! Please enter in format 00:00" << std::endl;
+					std::cerr << "Error invalid time! Please enter in format 00:00 greater than the current time" << std::endl;
 				}
 			}
 			else if (i == SYMPTOM_INDEX) {
-				this->printCriticalMenu();
+				//get the patient's symptom 
+				printCriticalMenu();
 				currentPatient.setMainSymptoms(value);
 			}
 			else if (i == CATEGORY_INDEX) {
@@ -161,28 +188,43 @@ void Menu::menuSelectionA() {
 			}
 		}
 	}
+	//add a new patient 
 	myPatients.addPatient(currentPatient);
+	//see if anyone deserves a promotion
 	myPatients.promoteQueue();
 }
 
+/*
+Menu::changePatientCategoryMenu() - used for changing the patient's priority if their condition worsens
+Input:
+N/A
+Output:
+Void
+*/
 void Menu::changePatientCategoryMenu() {
 	bool repeat = true;
 	std::string value;
+	//repeat until we've updated a patient
 	while (repeat) {
 		try {
+			//prompt user for health care
 			std::cout << "Please enter health care number of patient you wish to change " << std::endl;
 			std::cin >> value;
 			checkValidHealthCare(value);
 			std::string currentHealthNumber = value;
 			int currentPatientCategory = myPatients.getPatientCategory(value);
+
 			//check if the patient is actually in the list
 			if (currentPatientCategory == -1) {
 				std::cout << std::endl << "patient with id " << value << " not found! " << std::endl  << std::endl;
 				return;
 			}
+			//output the patient's current condition 
 			std::cout << "=====Patient Health # " << value << "============" << std::endl;
 			std::cout << "Current patient condition: " << critMenu.at(currentPatientCategory - 1) << std::endl;
 			std::cout << "===========================================" << std::endl << std::endl;
+
+			//update the patient's category
 			try {
 				std::cout << "=================================================" << std::endl;
 				printCriticalMenu();
@@ -220,6 +262,12 @@ void Menu::changePatientCategoryMenu() {
 	}
 }
 
+/*  Menu::printMainMenu() - print's the main menu for the user 
+Input: 
+N/A
+Output:
+void
+*/
 void Menu::printMainMenu() {
 	char value;
 	bool repeater = true;
@@ -240,6 +288,13 @@ void Menu::printMainMenu() {
 	}
 }
 
+/*
+Menu::generateMainMenu() - Creates the main menu text
+Input:
+N/A
+Output:
+void
+*/
 void Menu::generateMainMenu() {
 	mainMenu.push_back("============== Main menu ==============");
 	mainMenu.push_back("(1). Add new patient");
@@ -252,10 +307,22 @@ void Menu::generateMainMenu() {
 	mainMenu.push_back("=======================================");
 }
 
+/*Menu::generateSubMenus() - generates the submenus 
+Input:
+N/A
+Output:
+void
+*/
 void Menu::generateSubMenus() {
 	this->generateSubMenuA();
 }
 
+/* Menu::generateSubMenuA() - Generates the prompts for adding a patient
+Input:
+N/A
+Output:
+void
+*/
 void Menu::generateSubMenuA() {
 	std::vector<std::string> menuA;
 	menuA.push_back("Enter Last Name");
@@ -271,6 +338,12 @@ void Menu::generateSubMenuA() {
 	menuSelection.push_back(menuA);
 }
 
+/* Menu::generateCriticalMenu()  - Generates the critical condition level menu
+Input:
+N/A
+Output:
+void
+*/
 void Menu::generateCriticalMenu() {
 	critMenu.push_back("(1) Critical and life-threatening, requires immediate care");
 	critMenu.push_back("(2) Critical, requires care very soon");
@@ -280,25 +353,43 @@ void Menu::generateCriticalMenu() {
 	critMenu.push_back("(6) Not a priority");
 }
 
+/* Menu::printCriticalMenu() - Outputs the critical condition menu to console
+Input:
+N/A
+Output:
+void
+*/
 void Menu::printCriticalMenu() {
 	for (int i = 0; i < critMenu.size(); i++) {
 		std::cout << critMenu.at(i) << std::endl;
 	}
 }
-void Menu::generateSubMenuB() {
 
-}
-
+/* Menu::stringToInt(std::string myStr) - converts a string value to an integer if it's an integer
+Input:
+std::string myStr - the input string we're converting
+Output:
+void
+integer - The converted integer from string
+*/
 int Menu::stringToInt(std::string myStr) {
 	int inteVal;
+	//pass through buffer to convert to int
 	std::istringstream buffer(myStr);
 	buffer >> inteVal;
+	//when it's not a number
 	if (inteVal < 0) {
 		throw "Invalid (integer) number exception";
 	}
 	return inteVal;
 }
 
+/* Menu::checkValidHealthCare(std::string healthcareNumber) - checks if a string is a valid health care number 
+Input:
+std::string healthcareNumber - string format potential healthcare number
+Output:
+void
+*/
 void Menu::checkValidHealthCare(std::string healthcareNumber) {
 	//check length and check if the healthcare number is all numbers
 	if (healthcareNumber.length() == 8) {
@@ -314,7 +405,12 @@ void Menu::checkValidHealthCare(std::string healthcareNumber) {
 	}
 }
 
-
+/* is_digits(const std::string &str) - checks if a string is an integer number
+Input:
+const std::string &str - the string we're passing in to check if it's a number
+Output:
+bool - if it's a number or not 
+*/
 bool Menu::is_digits(const std::string &str)
 {
 	return std::all_of(str.begin(), str.end(), ::isdigit); // C++11

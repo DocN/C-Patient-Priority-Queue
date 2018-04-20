@@ -94,7 +94,7 @@ bool operator>=(Time t1, Time t2) {
 			return true;
 		}
 		else if (t1.getMinute() == t2.getMinute()) {
-			return true;
+			return false;
 		}
 		else {
 			return false;
@@ -106,10 +106,10 @@ bool operator>=(Time t1, Time t2) {
 }
 
 Time Time::getTimeDifference(Time currentTime) {
+
 	//t1 used for currentTime  and t2 used for time we're evaluating against
 	int currentHour = currentTime.getHour();
 	int currentMin = currentTime.getMinute();
-
 	int newHour = currentHour - getHour();
 	int newMin = 0;
 	//check if we need to pull from hours
