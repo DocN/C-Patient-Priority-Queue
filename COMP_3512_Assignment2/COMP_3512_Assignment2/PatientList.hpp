@@ -26,4 +26,6 @@ public:
 	int getPatientIndex(std::vector<Patient> tempList, std::string healthKey);
 	void setCategoryID(int, std::string);
 	void promoteQueue();
+	std::vector<Patient> copyPatientVector();
+	void removeAllPatients();
 };

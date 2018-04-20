@@ -26,9 +26,11 @@ bool Menu::pickMainMenu(char selected) {
 	}
 	else if (selected == '4') {
 		//save 
+		readwriter.writePatientList(myPatients);
 	}
 	else if (selected == '5') {
 		//load
+		readwriter.loadPatientList(myPatients);
 	}
 	else if (selected == '6') {
 		//print patients

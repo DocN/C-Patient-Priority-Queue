@@ -148,3 +148,23 @@ void PatientList::promoteQueue() {
 		pList.push(tempList.at(i));
 	}
 }
+
+
+std::vector<Patient> PatientList::copyPatientVector() {
+	std::vector<Patient> tempList;
+	while (!pList.empty()) {
+		Patient currentPatient = pList.top();
+		pList.pop();
+		tempList.push_back(currentPatient);
+	}
+	for (int i = 0; i < tempList.size(); i++) {
+		pList.push(tempList.at(i));
+	}
+	return tempList;
+}
+
+void PatientList::removeAllPatients() {
+	while (!pList.empty()) {
+		pList.pop();
+	}
+}

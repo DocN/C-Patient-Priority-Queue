@@ -117,6 +117,7 @@
   <ItemGroup>
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="PatientList.cpp" />
+    <ClCompile Include="ReadWriter.cpp" />
     <ClCompile Include="Time.cpp" />
     <ClCompile Include="Date.cpp" />
     <ClCompile Include="Name.cpp" />
@@ -126,6 +127,7 @@
   <ItemGroup>
     <ClInclude Include="Menu.hpp" />
     <ClInclude Include="PatientList.hpp" />
+    <ClInclude Include="ReadWriter.hpp" />
     <ClInclude Include="Time.hpp" />
     <ClInclude Include="Date.hpp" />
     <ClInclude Include="Name.hpp" />

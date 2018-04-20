@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include "PatientList.hpp"
+#include "ReadWriter.hpp"
 
 class Menu {
 private:
@@ -31,6 +32,7 @@ private:
 	int const MIN_CATEGORY_ID = 1;
 	int const MAX_CATEGORY_ID = 6;
 	PatientList myPatients;
+	ReadWriter readwriter;
 
 
 public:
@@ -44,14 +46,6 @@ public:
 	void checkValidHealthCare(std::string);
 	bool is_digits(const std::string &str);
 	void generateSubMenuB();
-	void generateSubMenuC();
-	void generateSubMenuD();
-	void generateSubMenuE();
-	void generateSubMenuF();
-	void generateSubMenuG();
-
-
-
 	void printMainMenu();
 	bool pickMainMenu(char);
 	int stringToInt(std::string);
