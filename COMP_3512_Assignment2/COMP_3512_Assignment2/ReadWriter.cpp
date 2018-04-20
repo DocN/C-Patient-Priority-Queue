@@ -6,39 +6,60 @@
 #include <sstream>
 #include <stdio.h>
 
-
+/*ReadWriter - default constructor 
+*/
 ReadWriter::ReadWriter() {
 
 }
 
+/*ReadWriter::writePatientList(PatientList& currentList) - writes the patient's in the system to patients.txt
+Input:
+PatientList& currentList - the list of patients
+Output:
+void
+*/
 void ReadWriter::writePatientList(PatientList& currentList) {
 	std::vector<Patient> tempList = currentList.copyPatientVector();
+	//create the file we're writing our patientlist to 
 	std::ofstream myfile(fileName);
-	if (myfile.is_open())
-	{
-		for (int i = 0; i < tempList.size(); i++) {
-			Patient currentPatient = tempList.at(i);
-			myfile << currentPatient.getName().getLastName() << "\n";
-			myfile << currentPatient.getName().getFirstName() << "\n";
-			myfile << currentPatient.getName().getMiddleName() << "\n";
-			myfile << currentPatient.getBirthday().getMonthOfBirth() << "\n";
-			myfile << currentPatient.getBirthday().getDayOfBirth() << "\n";
-			myfile << currentPatient.getBirthday().getYearOfBirth() << "\n";
-			myfile << currentPatient.getHealthCareNumber() << "\n";
-			myfile << currentPatient.getTimeAdmitted().getHour() << "\n";
-			myfile << currentPatient.getTimeAdmitted().getMinute() << "\n";
-			myfile << currentPatient.getMainSymptoms() << "\n";
-			myfile << currentPatient.getCategoryNumber() << "\n";
+	try {
+		if (myfile.is_open())
+		{
+			//go through all our patients and write them onto the file
+			for (int i = 0; i < tempList.size(); i++) {
+				Patient currentPatient = tempList.at(i);
+				myfile << currentPatient.getName().getLastName() << "\n";
+				myfile << currentPatient.getName().getFirstName() << "\n";
+				myfile << currentPatient.getName().getMiddleName() << "\n";
+				myfile << currentPatient.getBirthday().getMonthOfBirth() << "\n";
+				myfile << currentPatient.getBirthday().getDayOfBirth() << "\n";
+				myfile << currentPatient.getBirthday().getYearOfBirth() << "\n";
+				myfile << currentPatient.getHealthCareNumber() << "\n";
+				myfile << currentPatient.getTimeAdmitted().getHour() << "\n";
+				myfile << currentPatient.getTimeAdmitted().getMinute() << "\n";
+				myfile << currentPatient.getMainSymptoms() << "\n";
+				myfile << currentPatient.getCategoryNumber() << "\n";
+			}
+			myfile.close();
 		}
-		myfile.close();
+		//remove patients from queue that were written to file
+		currentList.removeAllPatients();
+		std::cout << "Patients successfully saved!" << std::endl;
+	} catch (...) {
+		std::cout << "failed to save patients!" << std::endl;
 	}
-	currentList.removeAllPatients();
-	std::cout << "Patients successfully saved!" << std::endl;
 }
 
+/*ReadWriter::loadPatientList(PatientList& currentList) - loads all the patients from patients.txt to the patient queue
+Input:
+PatientList& currentList - our patient list
+Output:
+void
+*/
 void ReadWriter::loadPatientList(PatientList& currentList) {
 	std::string line;
 	std::ifstream myfile(fileName);
+	//load the file 
 	if (myfile.is_open())
 	{
 		while (getline(myfile, line))
@@ -76,16 +97,30 @@ void ReadWriter::loadPatientList(PatientList& currentList) {
 			}
 		}
 		myfile.close();
+		//delete the file after we're done loading it
 		deleteFile();
 		std::cout << "Patients successfully loaded!" << std::endl;
 	}
 }
 
+/*ReadWriter::deleteFile() - deletes the patients.txt list
+Input:
+N/A
+Output:
+void
+*/
 void ReadWriter::deleteFile() {
 	if (remove("patients.txt") != 0) {
 		std::cout << "error deleting loaded file " << std::endl;
 	}
 }
+
+/*ReadWriter::stringToInt(std::string myStr) - converts a string to an integer if it's numbers
+Input: 
+std::string myStr - the string we're converting to an integer
+Output:
+int - integer value we get from the string
+*/
 int ReadWriter::stringToInt(std::string myStr) {
 	int inteVal;
 	std::istringstream buffer(myStr);
