@@ -63,4 +63,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Assignment 2 Testing.docx">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
 </Project>

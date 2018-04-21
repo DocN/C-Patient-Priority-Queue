@@ -133,6 +133,9 @@
     <ClInclude Include="Name.hpp" />
     <ClInclude Include="Patient.hpp" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Assignment 2 Testing.docx" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

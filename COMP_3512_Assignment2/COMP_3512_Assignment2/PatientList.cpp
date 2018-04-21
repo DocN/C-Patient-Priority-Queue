@@ -82,6 +82,10 @@ Output:
 void
 */
 void PatientList::getNextPatient() {
+	if (pList.empty()) {
+		std::cout << "error patient list is empty " << std::endl;
+		return;
+	}
 	//displays the next patient
 	std::cout << "=================Next Patient================" << std::endl;
 	Patient nextPatient = pList.top();

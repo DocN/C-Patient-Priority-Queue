@@ -45,7 +45,6 @@ public:
 	void changePatientCategoryMenu();
 	void checkValidHealthCare(std::string);
 	bool is_digits(const std::string &str);
-	void generateSubMenuB();
 	void printMainMenu();
 	bool pickMainMenu(char);
 	int stringToInt(std::string);
